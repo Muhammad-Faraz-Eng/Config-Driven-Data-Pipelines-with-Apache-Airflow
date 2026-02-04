@@ -1,0 +1,26 @@
+[2026-02-04T07:29:32.799+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: postgres_to_postgres_users.run_pipeline scheduled__2026-02-03T00:00:00+00:00 [queued]>
+[2026-02-04T07:29:32.813+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: postgres_to_postgres_users.run_pipeline scheduled__2026-02-03T00:00:00+00:00 [queued]>
+[2026-02-04T07:29:32.814+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2026-02-04T07:29:32.833+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): run_pipeline> on 2026-02-03 00:00:00+00:00
+[2026-02-04T07:29:32.845+0000] {standard_task_runner.py:60} INFO - Started process 174 to run task
+[2026-02-04T07:29:32.846+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'postgres_to_postgres_users', 'run_pipeline', 'scheduled__2026-02-03T00:00:00+00:00', '--job-id', '9', '--raw', '--subdir', 'DAGS_FOLDER/auto_generated/pipeline_dag_loader.py', '--cfg-path', '/tmp/tmpn9g9a9tn']
+[2026-02-04T07:29:32.868+0000] {standard_task_runner.py:88} INFO - Job 9: Subtask run_pipeline
+[2026-02-04T07:29:33.179+0000] {task_command.py:423} INFO - Running <TaskInstance: postgres_to_postgres_users.run_pipeline scheduled__2026-02-03T00:00:00+00:00 [running]> on host 0a53b187681b
+[2026-02-04T07:29:33.426+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='postgres_to_postgres_users' AIRFLOW_CTX_TASK_ID='run_pipeline' AIRFLOW_CTX_EXECUTION_DATE='2026-02-03T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-02-03T00:00:00+00:00'
+[2026-02-04T07:29:33.428+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/src/core/dag/dag_factory.py", line 28, in run_pipeline
+    source = SourceFactory.create(
+  File "/opt/airflow/src/core/factories/source_factory.py", line 15, in create
+    raise ValueError(f"Source type not registered: {source_type}")
+ValueError: Source type not registered: postgres
+[2026-02-04T07:29:33.450+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=postgres_to_postgres_users, task_id=run_pipeline, execution_date=20260203T000000, start_date=20260204T072932, end_date=20260204T072933
+[2026-02-04T07:29:33.470+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 9 for task run_pipeline (Source type not registered: postgres; 174)
+[2026-02-04T07:29:33.490+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2026-02-04T07:29:33.510+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

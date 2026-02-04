@@ -1,0 +1,28 @@
+[2026-02-04T08:40:12.894+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: postgres_to_postgres_users.run_pipeline manual__2026-02-04T08:35:04.831071+00:00 [queued]>
+[2026-02-04T08:40:12.907+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: postgres_to_postgres_users.run_pipeline manual__2026-02-04T08:35:04.831071+00:00 [queued]>
+[2026-02-04T08:40:12.908+0000] {taskinstance.py:2170} INFO - Starting attempt 2 of 2
+[2026-02-04T08:40:12.935+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): run_pipeline> on 2026-02-04 08:35:04.831071+00:00
+[2026-02-04T08:40:12.954+0000] {standard_task_runner.py:60} INFO - Started process 176 to run task
+[2026-02-04T08:40:12.997+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'postgres_to_postgres_users', 'run_pipeline', 'manual__2026-02-04T08:35:04.831071+00:00', '--job-id', '23', '--raw', '--subdir', 'DAGS_FOLDER/auto_generated/pipeline_dag_loader.py', '--cfg-path', '/tmp/tmpbvc7jknr']
+[2026-02-04T08:40:13.034+0000] {standard_task_runner.py:88} INFO - Job 23: Subtask run_pipeline
+[2026-02-04T08:40:13.505+0000] {task_command.py:423} INFO - Running <TaskInstance: postgres_to_postgres_users.run_pipeline manual__2026-02-04T08:35:04.831071+00:00 [running]> on host 0a53b187681b
+[2026-02-04T08:40:13.763+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='postgres_to_postgres_users' AIRFLOW_CTX_TASK_ID='run_pipeline' AIRFLOW_CTX_EXECUTION_DATE='2026-02-04T08:35:04.831071+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-02-04T08:35:04.831071+00:00'
+[2026-02-04T08:40:13.769+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/src/core/dag/dag_factory.py", line 32, in run_pipeline
+    transformations = [
+  File "/opt/airflow/src/core/dag/dag_factory.py", line 33, in <listcomp>
+    TransformationFactory.create(t["type"], t.get("params", {}))
+  File "/opt/airflow/src/core/factories/transformation_factory.py", line 25, in create
+    return transformation_class(params)
+TypeError: Can't instantiate abstract class IdentityTransformation with abstract method transform
+[2026-02-04T08:40:13.813+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=postgres_to_postgres_users, task_id=run_pipeline, execution_date=20260204T083504, start_date=20260204T084012, end_date=20260204T084013
+[2026-02-04T08:40:13.846+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 23 for task run_pipeline (Can't instantiate abstract class IdentityTransformation with abstract method transform; 176)
+[2026-02-04T08:40:13.895+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2026-02-04T08:40:13.923+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

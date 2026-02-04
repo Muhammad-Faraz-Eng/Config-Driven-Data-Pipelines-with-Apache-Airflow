@@ -1,0 +1,28 @@
+[2026-02-04T09:18:12.275+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: postgres_to_postgres_users.run_pipeline manual__2026-02-04T09:12:51.262320+00:00 [queued]>
+[2026-02-04T09:18:12.288+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: postgres_to_postgres_users.run_pipeline manual__2026-02-04T09:12:51.262320+00:00 [queued]>
+[2026-02-04T09:18:12.289+0000] {taskinstance.py:2170} INFO - Starting attempt 2 of 2
+[2026-02-04T09:18:12.313+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): run_pipeline> on 2026-02-04 09:12:51.262320+00:00
+[2026-02-04T09:18:12.336+0000] {standard_task_runner.py:60} INFO - Started process 176 to run task
+[2026-02-04T09:18:12.386+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'postgres_to_postgres_users', 'run_pipeline', 'manual__2026-02-04T09:12:51.262320+00:00', '--job-id', '35', '--raw', '--subdir', 'DAGS_FOLDER/auto_generated/pipeline_dag_loader.py', '--cfg-path', '/tmp/tmpd6692dac']
+[2026-02-04T09:18:12.417+0000] {standard_task_runner.py:88} INFO - Job 35: Subtask run_pipeline
+[2026-02-04T09:18:12.848+0000] {task_command.py:423} INFO - Running <TaskInstance: postgres_to_postgres_users.run_pipeline manual__2026-02-04T09:12:51.262320+00:00 [running]> on host 52dd036bc749
+[2026-02-04T09:18:13.536+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='postgres_to_postgres_users' AIRFLOW_CTX_TASK_ID='run_pipeline' AIRFLOW_CTX_EXECUTION_DATE='2026-02-04T09:12:51.262320+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-02-04T09:12:51.262320+00:00'
+[2026-02-04T09:18:13.559+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/src/core/dag/dag_factory.py", line 45, in run_pipeline
+    pipeline_obj.run()
+  File "/opt/airflow/src/core/base/base_pipeline.py", line 22, in run
+    self.target.connect()
+  File "/opt/airflow/src/core/targets/postgres_target.py", line 14, in connect
+    host=self.connection_config["host"],
+AttributeError: 'PostgresTarget' object has no attribute 'connection_config'
+[2026-02-04T09:18:13.639+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=postgres_to_postgres_users, task_id=run_pipeline, execution_date=20260204T091251, start_date=20260204T091812, end_date=20260204T091813
+[2026-02-04T09:18:13.688+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 35 for task run_pipeline ('PostgresTarget' object has no attribute 'connection_config'; 176)
+[2026-02-04T09:18:13.722+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2026-02-04T09:18:13.749+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check
